@@ -1,31 +1,21 @@
 {
-  "name": "cesuim_docker_demo",
-  "version": "1.0.0",
-  "description": "cesuim docker demo",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chiyx/cesuim_docker_demo.git"
-  },
-  "author": "chiyxme@outlook.com",
-  "bugs": {
-    "url": "https://github.com/chiyx/cesuim_docker_demo/issues"
-  },
-  "homepage": "https://github.com/chiyx/cesuim_docker_demo#readme",
+  "private": true,
+  "author": "chiyxme <chiyxme@outlook.com>",
   "scripts": {
     "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.css src/**/*.js dist/",
-    "build": "yarn clean && mkdir dist && browserify src/app.ts -p [ tsify --noImplicitAny] > dist/app.js && yarn copy-files"
-  },
-  "devDependencies": {
-    "@types/jquery": "^3.5.16",
-    "browserify": "^17.0.0",
-    "copyfiles": "^2.4.1",
-    "rimraf": "^5.0.0",
-    "tsify": "^5.0.4",
-    "typescript": "^5.0.4"
+    "dev": "umi dev",
+    "build": "yarn clean && umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
   },
   "dependencies": {
-    "jquery": "^3.6.4"
+    "umi": "^4.0.65"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.3"
   }
 }
