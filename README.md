@@ -4,7 +4,7 @@ cesuim docker demo
 ## 基础依赖
 
 - nodejs: v16.19.1
-- docker: 用于运行镜像，安装参考：<>
+- docker: 用于运行镜像，安装参考：<https://yeasy.gitbook.io/docker_practice/install/mac>
 
 ## 结构说明
 
