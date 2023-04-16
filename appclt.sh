@@ -3,24 +3,32 @@
 PROG_NAME=$0
 ACTION=$1
 CONTAINER_NAME=cesuim_web
+CURRENT_DIR=$(cd $(dirname $0);pwd)
+DOCKER_CONFIG_DIR="APP-META/docker-config"
+
 
 usege() {
+    echo "$CURRENT_DIR"
     echo "Usage: $PROG_NAME {install|clean|build|restart|stop}"
 }
 
 install() {
+    cd $CURRENT_DIR/frontend
     yarn install
 }
 
 clean() {
+    cd $CURRENT_DIR/frontend
     yarn clean
 }
 
 build() {
     echo "======yarn build======="
+    cd $CURRENT_DIR/frontend
     yarn build
     echo "======docker build======="
-    docker build -t cesuim_docker_demo .
+    cd $CURRENT_DIR
+    docker build -f $DOCKER_CONFIG_DIR/Dockerfile  -t cesuim_docker_demo .
 }
 
 
@@ -39,6 +47,12 @@ stop_container() {
 restart() {
     stop_container
     docker run -it --rm -d -p 80:80 --name $CONTAINER_NAME cesuim_docker_demo
+}
+
+buildBase() {
+    tag="v1"
+    image_name="${CONTAINER_NAME}_base"
+    docker build -f $DOCKER_CONFIG_DIR/Dockerfile_base -t $image_name:$tag .
 }
 
 
@@ -60,6 +74,9 @@ main() {
         ;;
         stop)
             stop_container
+        ;;
+        buildBase)
+            buildBase
         ;;
         *)
             usege
